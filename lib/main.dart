@@ -1,19 +1,32 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-void main() {
-  runApp(const MainApp());
+import 'firebase_options.dart';
+import 'phone_login.dart';
+import 'widget_tree.dart';
+
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.android);
+
+  runApp(const MyApp());
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
+    return ChangeNotifierProvider(
+      create: (context) => PhoneSignInProvider(),
+      child: GetMaterialApp(
+        theme: ThemeData(
+          useMaterial3: true,
         ),
+        home: const WidgetTree(),
       ),
     );
   }
