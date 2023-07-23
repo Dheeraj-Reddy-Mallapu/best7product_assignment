@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 final db = FirebaseFirestore.instance;
 final currentUser = FirebaseAuth.instance.currentUser!;
+Map<String, dynamic> currentUserDetails = {};
 List<Map<String, dynamic>> allUsers = [];
 
 retreiveCollection(String collectionName) async {

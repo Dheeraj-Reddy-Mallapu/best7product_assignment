@@ -1,4 +1,5 @@
 import 'package:best7product_assignment/loading.dart';
+import 'package:best7product_assignment/messaging_service.dart';
 import 'package:best7product_assignment/my_profile.dart';
 import 'package:best7product_assignment/view_all_users.dart';
 import 'package:flutter/material.dart';
@@ -25,14 +26,16 @@ class _HomeScreenState extends State<HomeScreen> {
     }
 
     isLoading = false;
-    setState(() {
-      // Trigger a rebuild after all the asynchronous functions complete
-    });
+    setState(() {});
   }
+
+  //// notification service
+  final _messagingService = MessagingService();
 
   @override
   void initState() {
     initData();
+    _messagingService.init(context);
     super.initState();
   }
 
@@ -47,8 +50,8 @@ class _HomeScreenState extends State<HomeScreen> {
           actions: [
             ElevatedButton(
               onPressed: () {
-                final user = allUsers.where((element) => element['phoneNumber'] == currentUser.phoneNumber).first;
-                Get.to(() => MyProfile(user: user, isCurrentUser: true));
+                // final user = allUsers.where((element) => element['phoneNumber'] == currentUser.phoneNumber).first;
+                Get.to(() => const MyProfile(isCurrentUser: true));
               },
               child: const Text('Profile'),
             ),
@@ -80,10 +83,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Row(
                         children: [
                           IconButton(
+                            tooltip: 'View User details',
                             onPressed: () => Get.to(() => MyProfile(user: user, isCurrentUser: false)),
                             icon: const Icon(Icons.dehaze_outlined),
                           ),
                           IconButton(
+                            tooltip: 'View location in Map',
                             onPressed: () {
                               if (user['location'] != null) {
                                 Get.to(() => MyMapView(

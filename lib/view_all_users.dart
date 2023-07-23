@@ -13,7 +13,7 @@ class AllUsersMapView extends StatefulWidget {
 class _AllUsersMapViewState extends State<AllUsersMapView> {
   late GoogleMapController mapController;
 
-  final LatLng _center = const LatLng(17.416330078551702, 78.47494613301858);
+  final LatLng _center = const LatLng(21.150862972085093, 79.0805031539669);
 
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
@@ -56,7 +56,7 @@ class _AllUsersMapViewState extends State<AllUsersMapView> {
               onMapCreated: _onMapCreated,
               initialCameraPosition: CameraPosition(
                 target: _center,
-                zoom: 8.0,
+                zoom: 4.0,
               ),
               markers: Set<Marker>.of(markers.values),
             ),

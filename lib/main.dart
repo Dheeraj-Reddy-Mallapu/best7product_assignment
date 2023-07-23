@@ -1,3 +1,4 @@
+import 'package:best7product_assignment/my_profile.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +28,10 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         home: const WidgetTree(),
+        getPages: [
+          GetPage(name: '/', page: () => const WidgetTree()),
+          GetPage(name: '/profile', page: () => const MyProfile(isCurrentUser: true))
+        ],
       ),
     );
   }
